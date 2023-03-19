@@ -57,26 +57,24 @@ include("protecao.php");
       ?>
       <?php
       $sql_ver = mysqli_query($conexao, "SELECT * FROM pets WHERE dono ='" . $dono . "'");
+
       $quantidade = $sql_ver->num_rows;
-      if ($quantidade > 0) {
-        $sql_print = mysqli_query($conexao, "SELECT * FROM pets WHERE dono ='" . $dono . "'");
-        if (mysqli_num_rows($sql_print) > 0) {
-          while ($linha = mysqli_fetch_assoc($sql_print)) {
+
+        if (mysqli_num_rows($sql_ver) > 0) {
+
+          while ($linha = mysqli_fetch_assoc($sql_ver)) {
             print("<option value='");
             echo ($linha["nome"]);
             print("'>");
             echo $linha["nome"];
             print("</option>");
-            $sql_ver = mysqli_query($conexao, "SELECT * FROM pets WHERE dono ='" . $dono . "'");
-            if ($quantidade > 0) {
-            } else {
-              break;
-            }
+
+  
           }
         } else {
           echo "Não há resultados para exibir.";
         }
-      }
+      
       ?>
     </select>
     <br>
